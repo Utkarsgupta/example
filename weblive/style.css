@@ -1,0 +1,103 @@
+html, body {
+    height: 100%; /* make html/body span full viewport height so backgrounds and percent heights work */
+    margin: 0; /* remove default browser margin to avoid whitespace around the page */
+}
+
+body {
+    background-image: url("BGIMG.png"); /* sets the page background image file */
+    background-repeat: no-repeat; /* prevents the background from tiling/repeating */
+    background-size: cover; /* scales the image to cover the entire viewport while preserving aspect ratio */
+    background-position: center center; /* centers the background image horizontally and vertically */
+    background-attachment: fixed; /* keeps the background fixed in place when the page content scrolls */
+}
+
+/* Centering container that keeps the search form in the middle of the viewport */  
+.search-container {
+    display: flex; /* create a flex context for easy centering */
+    align-items: center; /* vertically center the child (the form) */
+    justify-content: center; /* horizontally center the child (the form) */
+    width: 100%; /* allow the container to span full width */
+    height: 100vh; /* make container as tall as the viewport so centering works */
+}
+
+/* The translucent, curved search form */
+.search-form {
+    display: flex; /* lay out input and button inline */
+    gap: 12px; /* space between input and button */
+    background: rgba(255,255,255,0.12); /* translucent white background for frosted look */
+    -webkit-backdrop-filter: blur(6px); /* Safari: blur content behind the form */
+    backdrop-filter: blur(6px); /* blur content behind the form for glass effect */
+    border-radius: 999px; /* large radius to make a pill-shaped (curved) border */
+    padding: 10px 14px; /* inner spacing around input/button */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25); /* subtle shadow for depth */
+}
+
+/* Search input styling */
+.search-input {
+    border: none; /* remove default input border */
+    background: transparent; /* transparent so the form background shows through */
+    color: #ffffff; /* white text for contrast against background */
+    outline: none; /* remove default focus outline (we'll add a custom one if needed) */
+    font-size: 1rem; /* readable font size */
+    width: 360px; /* default input width on larger screens */
+    padding: 6px 8px; /* comfortable click/tap area */
+}
+
+.search-input::placeholder {
+    color: rgba(255,255,255,0.8); /* soft placeholder color that remains readable */
+    font-weight: 700; /* make placeholder text bold */
+    opacity: 0.95; /* ensure visibility across browsers */
+}
+
+/* Vendor-prefixed placeholder selectors for wider browser support */
+.search-input::-webkit-input-placeholder { color: rgba(255,255,255,0.8); font-weight:700; opacity:0.95; }
+.search-input:-ms-input-placeholder { color: rgba(255,255,255,0.8); font-weight:700; opacity:0.95; }
+.search-input::-ms-input-placeholder { color: rgba(255,255,255,0.8); font-weight:700; opacity:0.95; }
+
+/* Search button styling */
+.search-button {
+    border: none; /* remove default button border */
+    background: rgba(255,255,255,0.16); /* slightly more opaque background for the button */
+    color: #000000; /* dark text on the button for contrast */
+    padding: 8px 12px; /* comfortable clickable area */
+    border-radius: 999px; /* match pill shape of the form */
+    cursor: pointer; /* indicate clickable element */
+    font-weight: 600; /* slightly bolder label */
+}
+
+.search-button:active {
+    transform: translateY(1px); /* small press effect when clicked */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .search-input {
+        width: 60vw; /* make input width relative to viewport on small screens */
+        font-size: 0.95rem; /* slightly smaller font on mobile */
+    }
+    .search-form {
+        gap: 8px; /* reduce gap on small screens */
+        padding: 8px 10px; /* reduce padding on small screens */
+    }
+    .search-button {
+        padding: 7px 10px; /* slightly smaller button padding */
+    }
+}
+
+/* Improve keyboard accessibility: visible focus outline for keyboard users */
+.search-input:focus-visible, .search-button:focus-visible {
+    outline: 3px solid rgba(255,255,255,0.35); /* visible outline while matching translucent theme */
+    outline-offset: 2px; /* small separation from element */
+}
+
+/* Button hover for affordance */
+.search-button:hover {
+    background: rgba(255,255,255,0.24); /* slightly stronger button background on hover */
+}
+
+/* On small devices, avoid `background-attachment: fixed` for performance and layout issues */
+@media (max-width: 768px) {
+    body {
+        background-attachment: scroll; /* fallback for mobile browsers */
+    }
+}
